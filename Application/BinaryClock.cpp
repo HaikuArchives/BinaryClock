@@ -44,7 +44,7 @@ TBinaryClock::TBinaryClock() :BApplication(APP_SIGNATURE)
 	
 	bool settingsFound = false;
 	if (find_directory(B_USER_SETTINGS_DIRECTORY, &path) == B_OK) {
-		path.Append("BinaryClock_2.xx/settings");
+		path.Append("BinaryClock/settings");
 		ref = open(path.Path(), O_RDONLY);
 		if (ref >= 0) {
 			read(ref, (char *)&wind_loc, sizeof(wind_loc));

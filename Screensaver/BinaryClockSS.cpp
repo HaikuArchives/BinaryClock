@@ -47,7 +47,10 @@ extern "C" _EXPORT BScreenSaver *instantiate_screen_saver(BMessage *message, ima
 }
 
 BinaryClock::BinaryClock(BMessage *message, image_id image)
- : BScreenSaver(message, image)
+	:
+	BScreenSaver(message, image),
+	CurrOn(NULL),
+	CurrOff(NULL)
 {
 	// retrieves number of stars
 	if (message->FindInt32("mcolor", &mcolor) != B_OK) {
