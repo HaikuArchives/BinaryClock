@@ -42,6 +42,7 @@ TBinaryClock::TBinaryClock() :BApplication(APP_SIGNATURE)
 	// sets default face number incase settings file isn't found
 	face = 3;
 	
+	bool settingsFound = false;
 	if (find_directory(B_USER_SETTINGS_DIRECTORY, &path) == B_OK) {
 		path.Append("BinaryClock_2.xx/settings");
 		ref = open(path.Path(), O_RDONLY);
@@ -52,6 +53,7 @@ TBinaryClock::TBinaryClock() :BApplication(APP_SIGNATURE)
 			read(ref, (char *)&twentyfr, sizeof(bool));
 			close(ref);
 			myWindow->MoveTo(wind_loc);
+			settingsFound = true;
 		}
 	}
 	
@@ -76,11 +78,13 @@ TBinaryClock::TBinaryClock() :BApplication(APP_SIGNATURE)
 	// screen and if so moves it to 100, 100.
 	BRect frame = myWindow->Frame();
 	frame.InsetBy(-4, -4);
-	if (!frame.Intersects(BScreen(myWindow).Frame())) {
+	if (!frame.Intersects(BScreen(myWindow).Frame()) || !settingsFound) {
 		// it's not visible so reposition. I'm not going to get
 		// fancy here, just place in the default location
-		myWindow->MoveTo(100, 100);
+		myWindow->CenterOnScreen();
 	}
+
+	myWindow->ResizeTo(myView->CalcViewWidth(), myView->CalcViewHeight());
 
 	myWindow->Show();
 	myWindow->Unlock();  // I'm unsure if this is necessary
