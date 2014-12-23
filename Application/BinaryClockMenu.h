@@ -16,7 +16,7 @@
 class _EXPORT TMainMenu : public BPopUpMenu {
 
 public:
-						TMainMenu(char *name, BDirectory *graphicsDir, int tnumcolors); 
+						TMainMenu(char *name, const char* colorNames[]);
 	// revives the menu from being archived 
 						TMainMenu(BMessage *archive);
 	// receives the revive call and calls the message only constructor
@@ -24,7 +24,4 @@ public:
 	// archives the view, starts the replicant process
 	virtual	status_t	Archive(BMessage *archive, bool deep = true) const;
 	virtual				~TMainMenu();
-
-private:	
-	int		numcolors;
 };

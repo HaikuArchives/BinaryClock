@@ -23,8 +23,18 @@
 #include <Path.h>
 #include <Resources.h>
 #include <TranslationKit.h>
+#include <String.h>
 
 #include "BinaryClockView.h"
+
+const char* kColorNames[] = {
+	"Blue",
+	"Cyan",
+	"Purple",
+	"Red",
+	"Yellow",
+	NULL
+};
 
 // ----------------------------------------------------------------
 // Constructor for the View on the screen
@@ -47,58 +57,15 @@ TBCView::TBCView(BRect viewRect, char *title, int face, bool twentyfr)
 	theRect.Set(0,0,11,11);
 
 	// setup all the light images
-	i = 0;
-	BDirectory *graphicsDir = new BDirectory();
-	BPath *graphicsPath = new BPath();
-
-	if (find_directory(B_USER_SETTINGS_DIRECTORY, graphicsPath) == B_OK) {
-		graphicsPath->Append("BinaryClock_2.xx/Graphics");
-		if (graphicsDir->SetTo(graphicsPath->Path()) == B_OK) {
-			// Graphics directory exists
-			BDirectory *colorDir = new BDirectory();
-			BEntry *nextColorDir = new BEntry();
-			BPath *curPath = new BPath();
-			char curPathStr[B_PATH_NAME_LENGTH];
-			graphicsDir->Rewind();
-			while (graphicsDir->GetNextEntry(nextColorDir) == B_OK) {
-				colorDir = new BDirectory(nextColorDir);
-				if ((colorDir->Contains("on", B_FILE_NODE)) && (colorDir->Contains("off", B_FILE_NODE))) {
-					if (nextColorDir->GetPath(curPath) == B_OK) {
-						if (i == COLOR_ARRAY_SIZE) {
-							BAlert *ExitAlert = new BAlert("Fatal Error", "You have more choices in the Graphics directory than this program can handle.  Increase COLOR_ARRAY_SIZE in the source code and recompile.", "I'm Sorry", NULL, NULL, B_WIDTH_AS_USUAL, B_STOP_ALERT);
-							ExitAlert->Go();
-							exit(1);
-						}
-						sprintf(curPathStr, "%s/on", curPath->Path());
-						DotOn[i] = BTranslationUtils::GetBitmapFile(curPathStr);
-						sprintf(curPathStr, "%s/off", curPath->Path());
-						DotOff[i] = BTranslationUtils::GetBitmapFile(curPathStr);
-						i++;
-					}
-				}
-			}
-			numcolors = i;
-	
-			// This should not be added to the view as a child.
-			TheMenu = new TMainMenu("themenu", graphicsDir, numcolors);
-		}
-		else {
-			success = false;
-		}	
+	for (i = 0; kColorNames[i] != NULL ; i++) {
+		DotOn[i] = BTranslationUtils::GetBitmap(B_PNG_FORMAT,
+				BString() << kColorNames[i] << "-on.png");
+		DotOff[i] = BTranslationUtils::GetBitmap(B_PNG_FORMAT,
+				BString() << kColorNames[i] << "-off.png");
 	}
-	else {
-		success = false;
-	}	
+	numcolors = i;
 
-	// Graphics directory does not exist
-	//   Appraise the user of the problem and exit
-	if (!success) {
-		char exitMsg[B_PATH_NAME_LENGTH];
-		sprintf(exitMsg, "The \"%s\" directory does not exist.", graphicsPath->Path());
-		BAlert *ExitAlert = new BAlert("Fatal Error", exitMsg, "I'm Sorry", NULL, NULL, B_WIDTH_AS_USUAL, B_STOP_ALERT);
-		ExitAlert->Go();
-		exit(1);
-	}
+	TheMenu = new TMainMenu("themenu", kColorNames);
 
 	// sets the time
 	short		hours,minutes,seconds;
