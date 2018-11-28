@@ -106,7 +106,7 @@ TBCView::TBCView(BRect viewRect, char *title, int face, bool twentyfr)
 
 // ----------------------------------------------------------------
 
-void TBCView::SetTwentyFour(bool twentyfr, bool draw = true)
+void TBCView::SetTwentyFour(bool twentyfr, bool draw)
 {
 	BMenuItem *tmpItem;
 

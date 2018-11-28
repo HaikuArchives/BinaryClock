@@ -22,7 +22,7 @@
 
 #include "BinaryClockMenu.h"
 
-#define APP_SIGNATURE "application/x-vnd.BinaryClock_2.0"
+#define APP_SIGNATURE "application/x-vnd.BinaryClockApp"
 #define SM_GAP 1	// the gap between each graphic and the outside edge - in pixels
 #define LG_GAP .5	// the width of the center column - a ratio to the width of the graphics
 

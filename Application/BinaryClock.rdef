@@ -1,3 +1,35 @@
+
+resource app_signature "application/x-vnd.BinaryClockApp";
+
+resource app_version {
+	major = 2,
+	middle = 0,
+	minor = 0,
+
+	variety = B_APPV_FINAL,
+	internal = 0,
+
+	short_info = "A small binary clock",
+	long_info = "A small binary clock"
+};
+
+resource app_flags B_MULTIPLE_LAUNCH;
+
+resource(101, "Blue-on.png") #'PNG ' import "Graphics/Blue-on.png";
+resource(102, "Blue-off.png") #'PNG ' import "Graphics/Blue-off.png";
+
+resource(103, "Cyan-on.png") #'PNG ' import "Graphics/Cyan-on.png";
+resource(104, "Cyan-off.png") #'PNG ' import "Graphics/Cyan-off.png";
+
+resource(105, "Purple-on.png") #'PNG ' import "Graphics/Purple-on.png";
+resource(106, "Purple-off.png") #'PNG ' import "Graphics/Purple-off.png";
+
+resource(107, "Red-on.png") #'PNG ' import "Graphics/Red-on.png";
+resource(108, "Red-off.png") #'PNG ' import "Graphics/Red-off.png";
+
+resource(109, "Yellow-on.png") #'PNG ' import "Graphics/Yellow-on.png";
+resource(110, "Yellow-off.png") #'PNG ' import "Graphics/Yellow-off.png";
+
 resource file_types message;
 
 resource large_icon array {
@@ -53,34 +85,3 @@ resource mini_icon array {
 	$"18181818181818181818181818181818"
 	$"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 };
-
-resource app_signature "application/x-vnd.BinaryClock_2.0";
-
-resource app_version {
-	major = 2,
-	middle = 0,
-	minor = 0,
-	
-	variety = B_APPV_FINAL,
-	internal = 0,
-	
-	short_info = "a small binary clock",
-	long_info = "Written by David Enderson (david@enderson.net)"
-};
-
-resource app_flags B_MULTIPLE_LAUNCH;
-
-resource(101, "Blue-on.png") #'PNG ' import "Graphics/Blue-on.png";
-resource(102, "Blue-off.png") #'PNG ' import "Graphics/Blue-off.png";
-
-resource(103, "Cyan-on.png") #'PNG ' import "Graphics/Cyan-on.png";
-resource(104, "Cyan-off.png") #'PNG ' import "Graphics/Cyan-off.png";
-
-resource(105, "Purple-on.png") #'PNG ' import "Graphics/Purple-on.png";
-resource(106, "Purple-off.png") #'PNG ' import "Graphics/Purple-off.png";
-
-resource(107, "Red-on.png") #'PNG ' import "Graphics/Red-on.png";
-resource(108, "Red-off.png") #'PNG ' import "Graphics/Red-off.png";
-
-resource(109, "Yellow-on.png") #'PNG ' import "Graphics/Yellow-on.png";
-resource(110, "Yellow-off.png") #'PNG ' import "Graphics/Yellow-off.png";
