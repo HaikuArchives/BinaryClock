@@ -13,7 +13,7 @@ A Binary Clock. And yes, you really can use this to tell time!  I have found it 
 
 ### How to read the Binary Clock:
 Each column stands for a digit in a 24 hour clock with the format: XX : XX : XX
-each column is configured like this:a
+each column is configured like this:
 ```
 8
 4
